@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Demo Spring Boot Web</title>
+
+<link rel="icon" th:href="@{/images/logoENI.png}" />
+<link rel="stylesheet" th:href="@{/css/general.css}" />
+<link rel="stylesheet" th:href="@{/css/tp-form.css}" />
+
+</head>
+<body>
+
+<header th:replace="~{fragments/fragment-entete :: entete}">
+</header>
+
+<main>
+	<form action="" method="POST">
+		<h1>Détail du film</h1>
+	
+		<ul class="flex-outer">
+			<li>
+				<label for="idGenre">Genre</label>
+				<input id="idGenre" type="text" th:value="${film.genre.titre}" />
+			</li>
+			<li>
+				<label for="idAnnee">Année</label>
+				<input id="idAnnee" type="text" th:value="${film.annee}"/>
+			</li>
+			<li>
+				<label for="idTitre">Titre</label>
+				<input id="idTitre" type="text" th:value="${film.titre}"/>
+			</li>
+			<li>
+				<label for="idRealisateur">Réalisateur</label>
+				<input id="idRealisateur" type="text" th:value="${film.realisateur.prenom} + ' ' + ${film.realisateur.nom}"/>
+			</li>
+			<li>
+				<label for="idDuree">Durée</label>
+				<input id="idDuree" type="text" th:value="${film.duree}"/>
+			</li>
+			<li>
+				<label for="idActeurs">Acteur(s)</label>
+				<select name="" id="idActeurs" multiple="multiple">
+					<option th:each="a : ${film.acteurs}" th:text="'- ' + ${a.prenom} + ' ' + ${a.nom}"></option>
+				</select>
+			
+			</li>
+			<li>
+				<label for="idSynopsis">Synopsis</label>
+				<textarea id="idSynopsis" rows="3" th:text="${film.synopsis}" ></textarea>
+			</li>
+			<li data-th-if="${not #lists.isEmpty(film.avis)}">
+				<label for="tableComments" >Avis</label> 
+				<ul>
+					<li data-th-each="avis : ${film.avis}" data-th-text="${avis.commentaire} + '[' + ${avis.note} + '] - (' + ${avis.membre.prenom} + ')'"></li>
+				</ul>
+			</li>
+			<li>
+				<button type="submit">Enregistrer</button>
+			</li>
+		</ul>
+	
+	
+	</form>
+</main>
+
+
+
+<footer th:replace="~{fragments/fragment-footer :: footer}">
+</footer>
+
+
+</body>
+</html>

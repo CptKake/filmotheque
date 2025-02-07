@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Avis</title>
+
+<link rel="icon" th:href="@{/images/logoENI.png}" />
+<link rel="stylesheet" th:href="@{/css/general.css}" />
+<link rel="stylesheet" th:href="@{/css/tp-form.css}" />
+<link rel="stylesheet" th:href="@{/css/tp-error.css}" />
+
+
+</head>
+<body>
+<header th:replace="~{fragments/fragment-entete :: entete}">
+</header>
+	
+	<main>
+	<form th:object="${avis}"
+		 th:action="@{/avis/creer}" method="post">
+		<h1 data-th-text="'Ajouter un avis au film : ' + ${film.titre}"></h1>
+		<div class="cards" th:if="${#fields.hasErrors('*')}">
+		  <h2>Attention : Veuillez vérifier vos champs</h2>
+		  <!-- Affichage des Exceptions Métiers -->
+			<p th:each="err : ${#fields.globalErrors()}" th:text="#{${err}}"/>
+	
+		</div>
+		<input type="hidden" name="idFilm" data-th-value="${film.id}" />
+		<ul class="flex-outer">
+			<li>
+				<label for="inputNote" >Note : </label> 
+				<input type="number" id="inputNote" min="0" max="5" required data-th-field="*{note}" />
+			</li>
+			<li>
+				<label for="taCommentaire" >Commentaire : </label> 
+				<textarea id="taCommentaire" required data-th-field="*{commentaire}" rows="3"></textarea>
+			</li>
+			<li>
+				<button type="submit" >Enregistrer</button>
+			</li>
+		</ul>
+	</form>
+</main>
+</body>
+</html>

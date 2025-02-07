@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title >Contexte</title>
+<link rel="icon" th:href="@{/images/logoENI.png}" />
+<link rel="stylesheet" th:href="@{/css/general.css}" />
+<link rel="stylesheet" th:href="@{/css/tp-table.css}" />
+
+</head>
+<body>
+	<header th:replace="~{fragments/fragment-entete :: entete}">
+</header>
+	<main>
+		<h1>Contextes</h1>
+		<th:block data-th-if="${membreEnSession == null or membreEnSession.id == 0}">
+			<a href="/contexte/session?email=jtrillard@campus-eni.fr">Julien</a>
+			<a href="/contexte/session?email=abaille@campus-eni.fr">Anne-Lise</a>
+			<a href="/contexte/session?email=sgobin@campus-eni.fr">Stéphane[Admin]</a>
+		</th:block>
+		<th:block data-th-if="${membreEnSession != null and membreEnSession.id > 0}">
+			<a href="/contexte/cloture" >Déconnexion</a>
+		</th:block>
+	</main>
+</body>
+</html>

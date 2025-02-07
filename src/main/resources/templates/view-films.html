@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Filmothèque</title>
+
+<link rel="icon" th:href="@{/images/logoENI.png}" />
+<link rel="stylesheet" th:href="@{/css/general.css}" />
+<link rel="stylesheet" th:href="@{/css/tp-table.css}" />
+
+</head>
+<body>
+
+<header th:replace="~{fragments/fragment-entete :: entete}">
+</header>
+
+<main >
+	<table>
+		<!-- entete -->
+		<thead>
+			<tr>
+				<th>Genre</th>
+				<th>Année</th>
+				<th>Titre</th>
+				<th>Réalisateur</th>
+				<th>Action</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr th:each="f : ${films}">
+				<td th:text="${f.genre.titre}"></td>
+				<td th:text="${f.annee}"></td>
+				<td th:text="${f.titre}"></td>
+				<!--  <td th:text="${f.realisateur.prenom} + ' ' + ${f.realisateur.nom}"></td>-->
+				<td th:text="|${f.realisateur.prenom} ${f.realisateur.nom}|"></td>
+				<td>
+					<a th:href="@{/films/detail(id=${f.id})}">Détail</a>
+					<a sec:authorize="hasRole('ROLE_MEMBRE')" data-th-href="@{/avis/creer(idFilm=${f.id})}">Avis</a>	
+				</td>
+			</tr>
+		</tbody>
+
+	</table>
+</main>
+
+
+
+<footer th:replace="~{fragments/fragment-footer :: footer}">
+</footer>
+
+
+</body>
+</html>

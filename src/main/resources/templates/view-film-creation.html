@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Demo Spring Boot Web</title>
+
+<link rel="icon" th:href="@{/images/logoENI.png}" />
+<link rel="stylesheet" th:href="@{/css/general.css}" />
+<link rel="stylesheet" th:href="@{/css/tp-form.css}" />
+<link rel="stylesheet" th:href="@{/css/tp-error.css}" />
+
+</head>
+<body>
+
+<header th:replace="~{fragments/fragment-entete :: entete}">
+</header>
+
+<main>
+	<form th:action="@{/films/creer}" method="POST" th:object="${film}">
+		<h1>Création d'un film</h1>
+		<div class="cards" th:if="${#fields.hasErrors('*')}">
+		  <h2>Attention : Veuillez vérifier vos champs</h2>
+		  <!-- Affichage des Exceptions Métiers -->
+			<p th:each="err : ${#fields.globalErrors()}" th:text="#{${err}}"/>
+	
+		</div>
+	
+		<ul class="flex-outer">
+			<li>
+				<label for="idGenre">Genre</label>
+				<select id="idGenre" th:field="*{genre}">
+					<option th:each="g : ${genresSession}" th:text="${g.titre}" th:value="${g.id}"></option>
+				</select>
+				<p class="cards" th:errors="*{genre}">
+				</p>
+			</li>
+			
+			<li>
+				<label for="idAnnee">Année</label>
+				<input id="idAnnee" type="text" th:field="*{annee}"/>
+				<p class="cards" th:errors="*{annee}">
+				</p>
+			</li>
+			<li>
+				<label for="idTitre">Titre</label>
+				<input id="idTitre" type="text" th:field="*{titre}"/>
+				<p class="cards" th:errors="*{titre}">
+				</p>
+			</li>
+			<li>
+				<label for="idRealisateur">Réalisateur</label>
+				<select id="idRealisateur" th:field="*{realisateur}">
+					<option th:each="p : ${participantsSession}" th:value="${p.id}" th:text="${p.prenom} + ' ' + ${p.nom}"></option>
+				</select>
+				<p class="cards" th:errors="*{realisateur}">
+				</p>
+			</li>
+			<li>
+				<label for="idDuree">Durée</label>
+				<input id="idDuree" type="text" th:field="*{duree}"/>
+				<p class="cards" th:errors="*{duree}">
+				</p>
+			</li>
+			<li>
+				<label for="idActeurs">Acteur(s)</label>
+				<select id="idActeurs" th:field="*{acteurs}" multiple="multiple">
+					<option th:each="p : ${participantsSession}" th:value="${p.id}" th:text="${p.prenom} + ' ' + ${p.nom}"></option>
+				</select>
+				<p class="cards" th:errors="*{acteurs}">
+				</p>
+			</li>
+			<li>
+				<label for="idSynopsis">Synopsis</label>
+				<textarea id="idSynopsis" rows="3" th:field="*{synopsis}" ></textarea>
+				<p class="cards" th:errors="*{synopsis}">
+				</p>
+			</li>
+			<li>
+				<button type="submit">Enregistrer</button>
+			</li>
+			
+		</ul>
+	
+	
+	</form>
+</main>
+
+
+
+<footer th:replace="~{fragments/fragment-footer :: footer}">
+</footer>
+
+
+</body>
+</html>

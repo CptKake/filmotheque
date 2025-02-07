@@ -1,0 +1,20 @@
+<main xmlns:th="http://www.thymeleaf.org" data-th-fragment="frag-avis-form(action)">
+	<form data-th-object="${avis}"
+		 data-th-action="@{${action}}" method="post">
+		<h1 data-th-text="'Ajouter un avis au film ' + ${film.titre}"></h1>
+		<input type="hidden" name="idFilm" data-th-value="${film.id}" />
+		<ul class="flex-outer">
+			<li>
+				<label for="inputNote">Note : </label> 
+				<input type="number" id="inputNote" min="0" max="5" required data-th-field="*{note}" />
+			</li>
+			<li>
+				<label for="taCommentaire">Commentaire : </label> 
+				<textarea id="taCommentaire" required data-th-field="*{commentaire}" rows="3"></textarea>
+			</li>
+			<li>
+				<button type="submit">Enregistrer</button>
+			</li>
+		</ul>
+	</form>
+</main>

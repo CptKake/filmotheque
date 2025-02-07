@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Demo Spring Boot Web</title>
+
+<link rel="icon" th:href="@{/images/logoENI.png}" />
+<link rel="stylesheet" th:href="@{/css/general.css}" />
+
+</head>
+<body>
+
+<header th:replace="~{fragments/fragment-entete :: entete}">
+</header>
+
+<main class="center-main">
+	<section class="center-section">
+		<h1>Voici la bibliothèque des Films de ENI Ecole</h1>
+	</section>
+</main>
+
+
+
+
+<footer th:replace="~{fragments/fragment-footer :: footer}">
+</footer>
+
+</body>
+</html>
